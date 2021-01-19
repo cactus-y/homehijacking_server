@@ -70,3 +70,10 @@ class User(AbstractBaseUser, PermissionsMixin):
     @property
     def is_staff(self):
         return self.is_superuser
+
+class FriendModel(models.Model):
+    user = models.CharField(max_length=16)
+    friend = models.ManyToManyField(User)
+
+    def __str__(self):
+        return self.user + "'s friend list"
