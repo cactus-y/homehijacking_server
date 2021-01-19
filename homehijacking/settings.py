@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     # apps
     'users',
     'room',
+    'reservation',
 
     # packages
     'rest_framework',
