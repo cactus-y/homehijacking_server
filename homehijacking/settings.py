@@ -46,8 +46,13 @@ INSTALLED_APPS = [
     'room',
     'reservation',
 
-    # packages
+    # django rest framework
     'rest_framework',
+    'rest_framework.authtoken',
+    'rest_auth',
+    'rest_auth.registration',
+    'knox',
+
     # allauth
     'allauth',
     'allauth.account',
@@ -130,7 +135,15 @@ USE_L10N = True
 
 USE_TZ = True
 
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': ('knox.auth.TokenAuthentication',),
+}
+
 AUTH_USER_MODEL = 'users.User'
+
+REST_AUTH_SERIALIZERS = {
+    'USER_DETAILS_SERIALIZER': 'users.serializers.UserSerializer',
+}
 
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
@@ -138,6 +151,8 @@ AUTHENTICATION_BACKENDS = (
 )
 
 SITE_ID = 1
+
+REST_USE_JWT = True
 
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_EMAIL_VERIFICATION = 'none'

@@ -21,7 +21,6 @@ class UserManager(BaseUserManager):
             host_or_guest=host_or_guest,
             address=address,
         )
-
         user.set_password(password)
         user.save(using=self._db)
         return user
