@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from django.contrib.auth import authenticate
-from .models import User
+from .models import User, FriendModel
+
 
 class CreateUserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -30,6 +31,7 @@ class CreateUserSerializer(serializers.ModelSerializer):
         )
         return user
 
+
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
@@ -44,6 +46,7 @@ class UserSerializer(serializers.ModelSerializer):
             'password'
         )
 
+
 class LoginUserSerializer(serializers.Serializer):
     username = serializers.CharField()
     password = serializers.CharField()
@@ -53,3 +56,13 @@ class LoginUserSerializer(serializers.Serializer):
         if user and user.is_active:
             return user
         return serializers.ValidationError("Unable to log in with provided credentials.")
+
+
+class FriendSerializer(serializers.ModelSerializer):
+    friend = UserSerializer(read_only=True, many=True)
+    class Meta:
+        model = FriendModel
+        fields = (
+            'user',
+            'friend'
+        )
