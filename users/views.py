@@ -58,12 +58,6 @@ class UserUpdateAPI(generics.UpdateAPIView):
 
 class FriendListAPI(generics.ListAPIView):
     serializer_class = FriendSerializer
-
-    # def get_object(self):
-    #     user = self.request.user
-    #     friendlist = FriendModel.objects.filter(user=user)
-    #     print(friendlist)
-    #     return friendlist
     
     def get_queryset(self):
         user = self.request.user
