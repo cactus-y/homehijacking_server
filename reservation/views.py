@@ -33,6 +33,7 @@ class DetailRsvAPI(APIView):
         return Response(serializer.data)
 
     def delete(self, request, pk):
+        ### only host / guest can cancel reservation ###
         rsv = self.get_object(pk)
         rsv.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)

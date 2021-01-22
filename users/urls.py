@@ -10,4 +10,5 @@ urlpatterns = [
     path("auth/user/", views.UserAPI.as_view()),
     path("auth/user/<int:pk>/update/", views.UserUpdateAPI.as_view()),
     path('auth/user/friend/', views.FriendListAPI.as_view()),
+    path('auth/user/addfriend/', views.AddFriendAPI.as_view()),
 ]

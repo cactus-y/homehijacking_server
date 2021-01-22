@@ -59,7 +59,13 @@ class LoginUserSerializer(serializers.Serializer):
 
 
 class FriendSerializer(serializers.ModelSerializer):
-    friend = UserSerializer(read_only=True, many=True)
+    friend = UserSerializer(read_only=False, many=True)
+
+    def update(self, instance, validated_data):
+        _friend = validated_data.pop('friend')
+        instance.friend.add(_friend)
+        return instance
+
     class Meta:
         model = FriendModel
         fields = (

@@ -63,3 +63,22 @@ class FriendListAPI(generics.ListAPIView):
         user = self.request.user
         friendlist = FriendModel.objects.filter(user=user)
         return friendlist
+
+class AddFriendAPI(generics.GenericAPIView):
+    serializer_class = FriendSerializer
+    
+    def put(self, request):
+        user = request.user
+        friendID = self.request.data['friendID']
+        friend = User.objects.get(username=friendID)
+        data = request.data.copy()
+        data['friend'] = friend
+        data['user'] = user.id
+        FriendSerializer.update(self, FriendModel.objects.get(user=user), data)
+        return Response(status=status.HTTP_200_OK)
+        # serializer = FriendSerializer()
+        # if serializer.is_valid():
+        #     serializer.save()
+        #     return Response(serializer.data)
+        # return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    #     # serializer = self.get_serializer(data=request.data)
