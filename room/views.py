@@ -3,7 +3,7 @@ from rest_framework import generics, status
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from knox.models import AuthToken
-from .serializers import RoomSerializer, RoomCreateSerializer
+from .serializers import RoomSerializer
 from .models import Room
 
 class RoomListAPI(generics.ListAPIView):

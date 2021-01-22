@@ -10,4 +10,4 @@ class Reservation(models.Model):
     rsv_end_date = models.CharField(max_length=17)
 
     def __str__(self):
-        return self.host.username + "'s reservation"
+        return self.room.host.username + "'s reservation"
