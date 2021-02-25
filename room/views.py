@@ -17,13 +17,13 @@ class RoomDetailAPI(APIView):
     def get_object(self, user):
         return get_object_or_404(Room, host=user)
 
-    def get(self, request):
+    def get(self, request, pk):
         user = request.user
         room = self.get_object(user)
         serializer = RoomSerializer(room)
         return Response(serializer.data)
 
-    def delete(self, request):
+    def delete(self, request, pk):
         user = request.user
         room = self.get_object(user)
         room.delete()
@@ -41,7 +41,7 @@ class RoomCreateAPI(generics.GenericAPIView):
             body = {"message": "guest cannot register a room"}
             return Response(body, status=status.HTTP_400_BAD_REQUEST)
 
-        # Áßº¹¹æÁö
+        # ï¿½ßºï¿½ï¿½ï¿½ï¿½ï¿½
         # if Room.objects.filter(host=user) != None:
         #     body = {"message": "you already registered your room"}
         #     return Response(body, status=status.HTTP_400_BAD_REQUEST)
